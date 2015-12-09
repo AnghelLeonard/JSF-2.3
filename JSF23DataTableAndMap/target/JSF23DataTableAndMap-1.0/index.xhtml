@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable value="#{playersBean.dataHashMap}" var="t" border="1">
+                <h:column>
+                    <f:facet name="header">Ranking</f:facet>
+                        #{t.key}             
+                </h:column> 
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                        #{t.value.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Age</f:facet>
+                        #{t.value.age}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Birthplace</f:facet>
+                        #{t.value.birthplace}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Residence</f:facet>
+                        #{t.value.residence}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Height (cm)</f:facet>
+                        #{t.value.height}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Weight (kg)</f:facet>
+                        #{t.value.weight}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Coach</f:facet>
+                        #{t.value.coach}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Born</f:facet>
+                    <h:outputText value="#{t.value.born}">                
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
