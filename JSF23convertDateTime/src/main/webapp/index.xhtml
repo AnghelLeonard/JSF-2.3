@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>JSF 2.2 and 2.3 f:convertDateTime</title>
+    </h:head>
+    <h:body>
+        <h3>JSF 2.2 / 2.3 <code>f:convertDateTime</code> examples</h3>
+        <hr/>
+        <h3>JSF 2.2 <code>f:convertDateTime</code> examples</h3>
+        <strong>Example 1:</strong> Using <code>type="date"</code> and the <code>dateStyle</code> attribute to format <code>Date</code> <hr/>
+        <h:form>
+            <h:inputText value="#{myBean.date}">
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+            </h:inputText>
+        </h:form>
+        <code>short</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime dateStyle="short" />
+        </h:outputText>
+        <br/>
+        <code>medium</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime dateStyle="medium" />
+        </h:outputText>
+        <br/>
+        <code>long</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime dateStyle="long" />
+        </h:outputText>
+        <br/>
+        <code>full</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime dateStyle="full" />
+        </h:outputText>
+        <hr/><br/>
+
+        <strong>Example 2:</strong> Using <code>type="time"</code> and the <code>timeStyle</code> attribute to format <code>Date</code> <hr/>
+        <h:form>
+            <h:inputText value="#{myBean.date}">
+                <f:convertDateTime type="time" pattern="h:mm"/>
+            </h:inputText>
+        </h:form>
+        <code>short</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="time" timeStyle="short" />
+        </h:outputText>
+        <br/>
+        <code>medium</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="time" timeStyle="medium" />
+        </h:outputText>
+        <br/>
+        <code>long</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="time" timeStyle="long" />
+        </h:outputText>
+        <br/>
+        <code>full</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="time" timeStyle="full" />
+        </h:outputText>
+        <hr/><br/>
+
+        <strong>Example 3:</strong> Using <code>type="both"</code> and the <code>dateStyle</code> and <code>timeStyle</code> attributes to format <code>Date</code> <hr/>
+        <h:form>
+            <h:inputText value="#{myBean.date}">
+                <f:convertDateTime type="both" pattern="dd-MM-yyyy, h:mm"/>
+            </h:inputText>
+        </h:form>
+        <code>short</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="both" dateStyle="short" timeStyle="short" />
+        </h:outputText>
+        <br/>
+        <code>medium</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="both" dateStyle="medium" timeStyle="medium" />
+        </h:outputText>
+        <br/>
+        <code>long</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="both" dateStyle="long" timeStyle="long" />
+        </h:outputText>
+        <br/>
+        <code>full</code> formatting: <h:outputText value="#{myBean.date}">
+            <f:convertDateTime type="both" dateStyle="full" timeStyle="full" />
+        </h:outputText>
+        <hr/><br/>
+
+        <strong>Example 4:</strong> Using the <code>pattern</code> attribute to format <code>Date</code> <hr/>
+        <h:panelGrid columns="2" border="1" cellpadding="5">
+            <h:outputText value="PATTERN" style="font-weight:bold;" />
+            <h:outputText value="RESULT" style="font-weight:bold;" />
+
+            <h:outputText value="''H:mm''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="H:mm" />
+            </h:outputText>
+
+            <h:outputText value="''h:mm a''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="h:mm a" />
+            </h:outputText>
+
+            <h:outputText value="''H:mm:ss:SSS''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="H:mm:ss:SSS" />
+            </h:outputText>
+
+            <h:outputText value="''K:mm a,z''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="K:mm a,z" />
+            </h:outputText>
+
+            <h:outputText value="''dd.MM.yy''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="dd.MM.yy" />
+            </h:outputText>
+
+            <h:outputText value="''EEE, MMM d, ''yy''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="EEE, MMM d, ''yy" />
+            </h:outputText>
+
+            <h:outputText value="''yyyy.MMMMM.dd GGG hh:mm aaa''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="yyyy.MMMMM.dd GGG hh:mm aaa" />
+            </h:outputText>
+
+            <h:outputText value="''yyyy.MM.dd G 'at' hh:mm:ss z''" />
+            <h:outputText value="#{myBean.date}">
+                <f:convertDateTime pattern="yyyy.MM.dd G 'at' hh:mm:ss z" />
+            </h:outputText>
+        </h:panelGrid>
+
+        <h3>JSF 2.3 <code>f:convertDateTime</code> examples</h3>
+        <strong>Example 1:</strong> Using <code>type="offsetTime"</code> with the <code>pattern</code> attribute to format a <code>OffsetTime</code> <hr/>
+        <h:panelGrid columns="2" border="1" cellpadding="5">
+            <h:outputText value="PATTERN" style="font-weight:bold;" />
+            <h:outputText value="RESULT" style="font-weight:bold;" />
+
+            <h:outputText value="''H:mm''" />
+            <h:form>
+                <h:inputText value="#{myBean.offsetTime}">
+                    <f:convertDateTime type="offsetTime" pattern="H:mm" />
+                </h:inputText>
+            </h:form>
+
+            <h:outputText value="''h:mm a''" />
+            <h:outputText value="#{myBean.offsetTime}">
+                <f:convertDateTime type="offsetTime" pattern="h:mm a" />
+            </h:outputText>
+
+            <h:outputText value="''H:mm:ss:SSS''" />
+            <h:outputText value="#{myBean.offsetTime}">
+                <f:convertDateTime type="offsetTime" pattern="H:mm:ss:SSS" />
+            </h:outputText>
+        </h:panelGrid>
+        <hr/><br/>
+
+        <strong>Example 2:</strong> Using <code>type="offsetDateTime"</code> with the <code>pattern</code> attribute to format a <code>OffsetDateTime</code> <hr/>
+        <h:panelGrid columns="2" border="1" cellpadding="5">
+            <h:outputText value="PATTERN" style="font-weight:bold;" />
+            <h:outputText value="RESULT" style="font-weight:bold;" />
+
+            <h:outputText value="''dd-MM-yyyy, h:mm''" />
+            <h:form>
+                <h:inputText value="#{myBean.offsetDateTime}">
+                    <f:convertDateTime type="offsetDateTime" pattern="dd-MM-yyyy, h:mm" />
+                </h:inputText>
+            </h:form>
+
+            <h:outputText value="''h:mm a''" />
+            <h:outputText value="#{myBean.offsetDateTime}">
+                <f:convertDateTime type="offsetDateTime" pattern="h:mm a" />
+            </h:outputText>
+
+            <h:outputText value="''H:mm:ss:SSS''" />
+            <h:outputText value="#{myBean.offsetDateTime}">
+                <f:convertDateTime type="offsetDateTime" pattern="H:mm:ss:SSS" />
+            </h:outputText>
+
+            <h:outputText value="''dd.MM.yy''" />
+            <h:outputText value="#{myBean.offsetDateTime}">
+                <f:convertDateTime type="offsetDateTime" pattern="dd.MM.yy" />
+            </h:outputText>
+
+            <h:outputText value="''EEE, MMM d, ''yy''" />
+            <h:outputText value="#{myBean.offsetDateTime}">
+                <f:convertDateTime type="offsetDateTime" pattern="EEE, MMM d, ''yy" />
+            </h:outputText>
+        </h:panelGrid>
+        <hr/><br/>
+
+        <strong>Example 3:</strong> Using <code>type="zonedDateTime"</code> with the <code>pattern</code> attribute to format a <code>ZonedDateTime</code> <hr/>
+        <h:panelGrid columns="2" border="1" cellpadding="5">
+            <h:outputText value="PATTERN" style="font-weight:bold;" />
+            <h:outputText value="RESULT" style="font-weight:bold;" />
+
+            <h:outputText value="''dd-MM-yyyy, h:mm''" />
+            <h:form>
+                <h:inputText value="#{myBean.zonedDateTime}">
+                    <f:convertDateTime type="zonedDateTime" pattern="dd-MM-yyyy, h:mm" />
+                </h:inputText>
+            </h:form>
+
+            <h:outputText value="''h:mm a''" />
+            <h:outputText value="#{myBean.zonedDateTime}">
+                <f:convertDateTime type="zonedDateTime" pattern="h:mm a" />
+            </h:outputText>
+
+            <h:outputText value="''H:mm:ss:SSS''" />
+            <h:outputText value="#{myBean.zonedDateTime}">
+                <f:convertDateTime type="zonedDateTime" pattern="H:mm:ss:SSS" />
+            </h:outputText>
+
+            <h:outputText value="''dd.MM.yy''" />
+            <h:outputText value="#{myBean.zonedDateTime}">
+                <f:convertDateTime type="zonedDateTime" pattern="dd.MM.yy" />
+            </h:outputText>
+
+            <h:outputText value="''EEE, MMM d, ''yy''" />
+            <h:outputText value="#{myBean.zonedDateTime}">
+                <f:convertDateTime type="zonedDateTime" pattern="EEE, MMM d, ''yy" />
+            </h:outputText>
+
+            <h:outputText value="''yyyy.MM.dd G 'at' hh:mm:ss z''" />
+            <h:outputText value="#{myBean.zonedDateTime}">
+                <f:convertDateTime type="zonedDateTime" pattern="yyyy.MM.dd G 'at' hh:mm:ss z" />
+            </h:outputText>
+        </h:panelGrid>
+        <hr/><br/>
+
+        <strong>Example 4:</strong> Using <code>type="localDate"</code> and the <code>dateStyle</code> attribute to format <code>LocalDate</code> <hr/>
+        <h:form>
+            <h:inputText value="#{myBean.localDate}">
+                <f:convertDateTime type="localDate" pattern="dd-MM-yyyy"/>
+            </h:inputText>
+        </h:form>
+        <code>short</code> formatting: <h:outputText value="#{myBean.localDate}">
+            <f:convertDateTime type="localDate" dateStyle="short" />
+        </h:outputText>
+        <br/>
+        <code>medium</code> formatting: <h:outputText value="#{myBean.localDate}">
+            <f:convertDateTime type="localDate" dateStyle="medium" />
+        </h:outputText>
+        <br/>
+        <code>long</code> formatting: <h:outputText value="#{myBean.localDate}">
+            <f:convertDateTime type="localDate" dateStyle="long" />
+        </h:outputText>
+        <br/>
+        <code>full</code> formatting: <h:outputText value="#{myBean.localDate}">
+            <f:convertDateTime type="localDate" dateStyle="full" />
+        </h:outputText>
+        <hr/><br/>
+
+        <strong>Example 5:</strong> Using <code>type="localDateTime"</code> and the <code>dateStyle</code> and <code>timeStyle</code> attributes to format <code>LocalDateTime</code> <hr/>
+        <h:form>
+            <h:inputText value="#{myBean.localDateTime}">
+                <f:convertDateTime type="localDateTime" pattern="dd-MM-yyyy, H:mm"/>
+            </h:inputText>
+        </h:form>
+        <code>short</code> formatting: <h:outputText value="#{myBean.localDateTime}">
+            <f:convertDateTime type="localDateTime" dateStyle="short" timeStyle="short" />
+        </h:outputText>
+        <br/>
+        <code>medium</code> formatting: <h:outputText value="#{myBean.localDateTime}">
+            <f:convertDateTime type="localDateTime" dateStyle="medium" timeStyle="medium" />
+        </h:outputText>
+        <hr/>        
+    </h:body>
+</html>
