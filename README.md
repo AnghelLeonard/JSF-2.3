@@ -1,7 +1,7 @@
 # JSF-2.3
 ##JSF 2.3 Apps Examples
 
-This is a collection of examples for the [JSF & OmniFaces Fans](http://www.omnifaces-fans.org/).
+This is a collection of examples from the [JSF & OmniFaces Fans](http://www.omnifaces-fans.org/).
 Check [JSF 2.3 Tutorial](http://www.omnifaces-fans.org/p/jsf-23-tutorial.html) for more details!
 
 Included examples:
