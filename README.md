@@ -6,6 +6,7 @@ Check [JSF 2.3 Tutorial](http://www.omnifaces-fans.org/p/jsf-23-tutorial.html) f
 
 Included examples:
 
+- Support for custom types in UIData and UIRepeat ([check article](http://www.omnifaces-fans.org/2015/07/jsf-23-new-feature-registrable.html))
 - Support for the Map interface in UIData ([check article](http://www.omnifaces-fans.org/2015/10/jsf-23-202122-progress-of-iterable-and.html))
 - Support for the Iterable and Map interface in UIRepeat ([check article](http://www.omnifaces-fans.org/2015/10/jsf-23-202122-progress-of-iterable-and.html))
 - JSF 2.3 provides default producers for the most important artifacts ([check article](http://www.omnifaces-fans.org/2015/09/jsf-23-injection-and-el-resolving-of.html))
