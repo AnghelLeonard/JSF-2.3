@@ -17,3 +17,4 @@ Included examples:
 - Subscribe programmatically to listen PostRenderViewEvent from a custom component ([check article](http://www.omnifaces-fans.org/2015/10/just-tested-jsf-23-postrenderviewevent.html))
 - Enables class level validation via &lt;f:validateWholeBean/&gt; ([check article](http://www.omnifaces-fans.org/2015/12/jsf-23-class-level-bean-validation-on.html))
 - JSF 2.3 align the <f:convertDateTime/> to JSR 310 ([check article](http://www.omnifaces-fans.org/2015/12/jsf-23-align-to-new-data-and-time.html))
+- Quickstart for registering a web socket push connection in client side ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-websocket-quickstart.html))
