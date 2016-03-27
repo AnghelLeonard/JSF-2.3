@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>       
+    </h:head>
+    <h:body>                
+        <h:form>                
+            <h:commandButton value="Clock" action="#{pushBean.clockAction()}">
+                <f:ajax render="@form"/>
+            </h:commandButton>
+            Service status:
+            <h:outputText value="#{pushBean.info}"/>
+        </h:form>
+
+        <f:websocket channel="clock" connected="#{pushBean.connected}" 
+                     onopen="websocketOpenListener"
+                     onclose="websocketCloseListener"
+                     onmessage="socketListener" />                
+        <hr/>
+        <div id="clockId"></div>
+
+        <script type="text/javascript">
+
+            function websocketOpenListener(channel) {
+                alert("Channel " + channel + " was successfully open!");
+            }
+
+            function socketListener(message, channel, event) {
+                document.getElementById("clockId").innerHTML += message + "<br/>";
+            }
+
+            function websocketCloseListener(code, channel, event) {
+                if (code == -1) {
+                    // Web sockets not supported by client.
+                    alert("Web sockets not supported by client");
+                } else if (code == 1000) {
+                    // Normal close (as result of expired session or view).
+                    alert("The channel " + channel + " was successfully closed");
+                } else {
+                    // Abnormal close reason (as result of an error).
+                    alert("The channel " + channel + " was abnormally closed");
+                }
+            }
+        </script>    
+    </h:body>
+</html>
+
