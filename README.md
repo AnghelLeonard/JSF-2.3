@@ -19,3 +19,4 @@ Included examples:
 - JSF 2.3 align the <f:convertDateTime/> to JSR 310 ([check article](http://www.omnifaces-fans.org/2015/12/jsf-23-align-to-new-data-and-time.html))
 - Quickstart for registering a web socket push connection in client side ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-websocket-quickstart.html))
 - Explicitly open/close a websocket channel ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-explicitly-openclose-websocket.html))
+- Conditionally open/close a websocket channel ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-conditionally-openclose.html))
