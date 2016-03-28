@@ -20,3 +20,4 @@ Included examples:
 - Quickstart for registering a web socket push connection in client side ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-websocket-quickstart.html))
 - Explicitly open/close a websocket channel ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-explicitly-openclose-websocket.html))
 - Conditionally open/close a websocket channel ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-conditionally-openclose.html))
+- Fire one-time push when a channel has been opened ([check article](http://www.omnifaces-fans.org/2016/03/fire-one-time-push-when-channel-has.html))
