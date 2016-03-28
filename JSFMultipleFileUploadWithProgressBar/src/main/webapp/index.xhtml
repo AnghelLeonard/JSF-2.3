@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>JSF Multiple Upload</title>
+        <h:outputStylesheet library="default" name="css/styles.css"/>
+    </h:head>
+    <h:body>     
+
+        <f:websocket channel="upload" onmessage="socketListener" />   
+
+        <div class="main">            
+            <h:form id="uploadFormId" enctype="multipart/form-data">
+                <div class="file-upload">
+                    <h:outputLabel for="fileToUploadId" styleClass="file-upload-span" value="SELECT FILES"/>
+                    <h:inputFile id="fileToUploadId" f5:accept="image/*" f5:multiple="multiple" title="Select Files" value="#{uploadBean.files}"/>
+                </div>                
+                <table id="thumbnails" border="0"></table>
+                <h:panelGrid columns="3" border="0" cellspacing="5" cellpadding="3" styleClass="panelColumns">
+                    <h:commandButton id="uploadBtnId" image="#{resource['default:images/uploadbtn.png']}" actionListener="#{uploadBean.upload}" onclick="return validateLevel('high');" styleClass="upload-btn">
+                        <f:ajax execute="fileToUploadId trashId" render="uploadMessagesId" onevent="uploadProgress" onerror="uploadError"/>
+                        <f:attribute name="maxFilesNumber" value="5"/> 
+                        <f:attribute name="maxFileSize" value="2097152"/> 
+                        <f:attribute name="fileTypes" value="image/"/> 
+                    </h:commandButton>
+                    <input id="cancelBtnId" type="button" onclick="sendAllFilesToTrash(true);" class="cancel-btn"/>                    
+                    <f:verbatim>
+                        <!-- switch to AJAX indicator -->
+                        <!-- <img id="progressBarId" width="55" height="55" class="ajax-loader"/> -->
+                        <div id="progressBarId" style="color: white; padding-left:50px;" class="file-upload-span">0 %</div>
+                    </f:verbatim>
+                </h:panelGrid>                               
+                <h:messages id="uploadMessagesId" showDetail="false" showSummary="true" for="fileToUploadId" infoClass="success" errorClass="error"/>
+                <h:inputHidden id="trashId" value="#{uploadBean.trash}"/>                               
+            </h:form>                  
+            <div id="fatalErrorsId" class="error"></div>
+        </div>
+
+        <script>
+            // <![CDATA[
+
+            var trash = {items: []};
+            var nrOfFiles = 0;
+            var rejectedFiles = false;
+            var OK = "";
+            var WRONG_TYPE = "You can upload only images files !";
+            var WRONG_SIZE = "You can upload only images smaller than 2 MB !";
+
+            function validateLevel(level) {
+                if (nrOfFiles === 0) {
+                    document.getElementById("fatalErrorsId").innerHTML = "No valid files selected !";
+                    return false;
+                }
+                if (level === 'low') {
+                    return true;
+                } else if (level === 'high') {
+                    if (rejectedFiles) {
+                        sendAllFilesToTrash(true);
+                        document.getElementById("fatalErrorsId").innerHTML = "Please, provide only valid files !";
+                        return false;
+                    }
+                }
+            }
+
+            function handleFileSelect(evt) {
+
+                rejectedFiles = false;
+                nrOfFiles = 0;
+                var MAX_FILES = 5;
+                trash = {items: []};
+                var MAX_MB = 2097152; //2 MB               
+                var WRONG_NUMBER = "You can select maxim 5 images !";
+
+                document.getElementById("uploadFormId:uploadMessagesId").innerHTML = "";
+                document.getElementById("fatalErrorsId").innerHTML = "";
+                document.getElementById('thumbnails').innerHTML = "";
+                evt.stopPropagation();
+                evt.preventDefault();
+                var files = evt.target.files;
+
+                if (files.length > MAX_FILES) {
+
+                    sendAllFilesToTrash(true);
+                    document.getElementById("fatalErrorsId").innerHTML = ['<span>', WRONG_NUMBER, '</span>'].join('');
+                } else {
+                    for (var i = 0; i < files.length; i++) {
+
+                        var f = files[i];
+                        nrOfFiles++;
+
+                        // only process image files - this should not appear since
+                        // we have set f5:accept="image/*" on <h:inputFile>
+                        if (!f.type.match('image.*')) {
+                            addFileToThumbnails(f, WRONG_TYPE);
+                            continue;
+                        }
+
+                        // only files smaller than 2 MB
+                        if (f.size > MAX_MB) {
+                            addFileToThumbnails(f, WRONG_SIZE);
+                            continue;
+                        }
+
+                        //optional - you may add here file name length validation !
+
+                        var reader = new FileReader();
+
+                        // closure to capture the file information
+                        reader.onload = (function (theFile) {
+                            return function (e) {
+                                addFileToThumbnails(theFile, OK, e.target.result);
+                            };
+                        })(f);
+                        // read in the image file as a data URL
+                        reader.readAsDataURL(f);
+                    }
+                    checkForValidFiles();
+                }
+            }
+
+            function addFileToThumbnails(theFile, errCode, filePath) {
+
+                var KB = 1024;
+                var MB = 1048576; //1 MB
+                var MAX_LENGTH = 30; //characters
+
+                // render thumbnail
+                var fileName = theFile.name;
+                if (theFile.name.length > MAX_LENGTH) {
+                    fileName = theFile.name.substring(0, MAX_LENGTH) + "...";
+                }
+                var fileSize = 0;
+                if (theFile.size > MB)
+                    fileSize = (Math.round(theFile.size * 100 / (MB)) / 100).toString() + 'MB';
+                else
+                    fileSize = (Math.round(theFile.size * 100 / KB) / 100).toString() + 'KB';
+
+                // populate the thumbnails table
+                var thumbnails = document.getElementById("thumbnails");
+                var row = thumbnails.insertRow(-1);
+
+                // add a thumb for an image
+                if (errCode === OK) {
+                    var cellThumb = row.insertCell(0);
+                    var cellName = row.insertCell(1);
+                    var cellTrash = row.insertCell(2);
+                    cellThumb.style.width = '60px';
+                    cellThumb.innerHTML = ['<div class="grow"><img class="thumb" src="', filePath,
+                        '" title="', escape(theFile.name), '"/></div>'].join('');
+                    cellName.style.width = '460px';
+                    cellName.innerHTML = ['<span class="files-info">', fileName, '</span><br/>\n\
+                                <span class="files-size">', fileSize, '<span>'].join('');
+                    cellTrash.style.width = '20px';
+                    cellTrash.innerHTML = ['<div class="bw"><img src="./resources/default/images/trash.png"\n\
+                         onclick="sendFileToTrash(', row.rowIndex, ',\'', theFile.name, '\');" title=""/></div>'].join('');
+                }
+
+                // a thumb for a non-valid image
+                if (errCode === WRONG_TYPE || errCode === WRONG_SIZE) {
+                    var cellErr = row.insertCell(0);
+                    cellErr.colSpan = "3";
+                    cellErr.style.width = '540px';
+                    cellErr.innerHTML = ['<div class="err-div"><img src="./resources/default/images/err.png"/>\n\
+                        <span class="files-info">', fileName, ' (', fileSize, ')</span><br/>', errCode, '</div>'].join('');
+                    rejectedFiles = true;
+                    markForTrash(fileName);
+                }
+            }
+
+            function sendAllFilesToTrash(cleanThumbnails) {
+                nrOfFiles = 0;
+                document.getElementById('uploadFormId:fileToUploadId').value = "";
+                document.getElementById("fatalErrorsId").innerHTML = "";
+                document.getElementById("uploadFormId:uploadMessagesId").innerHTML = "";
+                // clear the thumbnails table
+                if (cleanThumbnails) {
+                    document.getElementById('thumbnails').innerHTML = "";
+                }
+                // clean the trash
+                trash = {items: []};
+                document.getElementById('uploadFormId:trashId').value = JSON.stringify(trash);
+            }
+
+            function sendFileToTrash(row, fileName) {
+                var thumbnails = document.getElementById("thumbnails");
+                thumbnails.rows.item(row).style.display = 'none';
+                if ((trash.items.length + 1) === nrOfFiles) {
+                    sendAllFilesToTrash(true);
+                } else {
+                    markForTrash(fileName);
+                }
+            }
+
+            function markForTrash(fileName) {
+                // add file to trash
+                trash.items.push({name: fileName});
+                document.getElementById('uploadFormId:trashId').value = JSON.stringify(trash);
+            }
+
+            function checkForValidFiles() {
+                if (trash.items.length === nrOfFiles) {
+                    sendAllFilesToTrash(false);
+                }
+            }
+
+            function uploadError(data) {
+                var errorMsg = "Sorry, unexpected error occured !";
+                if (data.status === "serverError") {
+                    errorMsg = "Sorry, the server response contains an error !";
+                } else if (data.status === "malformedXML") {
+                    errorMsg = "Sorry, an well-formed error occured !";
+                } else if (data.status === "httpError") {
+                    errorMsg = "Sorry, a communication protocol problem occured !";
+                } else if (data.status === "emptyResponse") {
+                    errorMsg = "Sorry, the server did't respond !";
+                }
+                document.getElementById("fatalErrorsId").innerHTML = ['<span>', errorMsg, '</span>'].join('');
+            }
+
+            function uploadProgress(data) {
+                if (data.status === "begin") {
+                    start();
+                }
+                if (data.status === "complete") {
+                    stop();
+                }
+            }
+
+            function start() {
+                document.getElementById('uploadFormId:uploadBtnId').disabled = true;
+                document.getElementById('cancelBtnId').disabled = true;
+                //document.getElementById("progressBarId").setAttribute("src", "./resources/default/images/ajaxloader.gif");                
+            }
+
+            function stop() {
+                document.getElementById('uploadFormId:uploadBtnId').disabled = false;
+                document.getElementById('cancelBtnId').disabled = false;
+                document.getElementById("progressBarId").innerHTML = "0 %";
+                //document.getElementById("progressBarId").removeAttribute("src");
+                sendAllFilesToTrash(true);                
+            }
+
+            function socketListener(message, channel, event) {                
+                document.getElementById("progressBarId").innerHTML = message + "%";
+            }
+
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                document.getElementById('uploadFormId:fileToUploadId').addEventListener('change', handleFileSelect, false);
+            } else {
+                alert("Please update your browser to support new APIs!");
+            }
+
+            //]]>
+        </script>
+    </h:body>
+</html>
+

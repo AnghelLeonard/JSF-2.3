@@ -1,0 +1,182 @@
+.main {
+    border: 2px solid #a1a1a1;
+    padding: 10px 40px;
+    background: #dddddd;
+    width: 500px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px #888888;
+    background-image: url('#{resource["default:images/bk.jpg"]}');
+}
+
+.panelColumns td {
+    vertical-align: central;                 
+}
+
+.thumb {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+}
+
+.upload-btn {       
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 115px;
+    height:30px;                
+    border: 0px solid #000;               
+}
+
+.cancel-btn{   
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 115px;
+    height: 30px;               
+    border: 0px solid #000;
+    background: url('#{resource["default:images/cancelbtn.png"]}') no-repeat;
+    cursor: pointer;
+}
+
+.ajax-loader{
+    padding-left: 217px;               
+}
+
+IMG[src=''], IMG:not([src])      
+{
+    opacity:0;
+}
+
+.err-div {                
+    height: 35px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=42)";
+    filter: alpha(opacity=42);
+    -moz-opacity: 0.42;
+    -khtml-opacity: 0.42;
+    opacity: 0.7;
+    border: 2px #000000 solid;
+    background-color: #ff720f;
+    padding: 3px;
+    color: #000000;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-style: inherit;
+    text-decoration: inherit;           
+    line-height: 1em;
+    -moz-box-shadow: 0px 0px 22px 2px #888888;
+    -webkit-box-shadow: 0px 0px 22px 2px #888888;
+    box-shadow: 0px 0px 22px 2px #888888;
+}
+
+.file-upload {
+    margin:10px;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+    color: #fff;
+    border: 2px solid #cccccc;
+    background: #000000;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    text-shadow: #000 1px 1px 4px;
+}
+
+.file-upload:hover {
+    background: #ff720f;
+}
+
+.file-upload input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.file-upload {
+    padding-top: 5px;
+    height: 30px;
+    width: 155px;
+}
+
+/* http://www.cssfontstack.com/Calibri */
+.file-upload-span {
+    font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', 'sans serif';
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.3999996185303px;
+}
+
+.files-info {
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.3999996185303px;
+    color:#ffffff;
+}
+
+.files-size {
+    font-family: 'Lucida Console', 'Lucida Sans Typewriter', monaco, 'Bitstream Vera Sans Mono', monospace;
+    font-size: 11px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.3999996185303px;
+    color:#ffffff;
+}
+
+.success {
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 800;
+    line-height: 15.3999996185303px;
+    color:#00cc00;
+}
+.error { 
+    width:510px;
+    font-family: 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26.3999996185303px;
+    color: #ff720f;
+}
+
+/* http://designshack.net/articles/css/joshuajohnson-2/ */
+.grow img {
+    height: 60px;
+    width: 60px;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.grow img:hover {
+    width: 200px;
+    height: 200px;
+}
+
+.bw {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.bw:hover {
+    -webkit-filter: grayscale(100%);
+}
