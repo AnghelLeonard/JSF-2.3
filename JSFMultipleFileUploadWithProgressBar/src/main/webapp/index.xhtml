@@ -10,7 +10,7 @@
     </h:head>
     <h:body>     
 
-        <f:websocket channel="upload" onmessage="socketListener" scope="session" />   
+        <f:websocket channel="upload" onmessage="socketListener" scope="view" />   
 
         <div class="main">            
             <h:form id="uploadFormId" enctype="multipart/form-data">
