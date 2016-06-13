@@ -21,3 +21,4 @@ Included examples:
 - Explicitly open/close a websocket channel ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-explicitly-openclose-websocket.html))
 - Conditionally open/close a websocket channel ([check article](http://www.omnifaces-fans.org/2016/03/jsf-23-conditionally-openclose.html))
 - Fire one-time push when a channel has been opened ([check article](http://www.omnifaces-fans.org/2016/03/fire-one-time-push-when-channel-has.html))
+- Generating a JavaScript function in the global JavaScript scope which allows the end user to execute a JSF AJAX request by just a function call in the JavaScript context ([check article](http://www.omnifaces-fans.org/2016/06/jsf-23-generating-javascript-function.html))
