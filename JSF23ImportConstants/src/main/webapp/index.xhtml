@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <f:metadata>
+        <f:importConstants type="javaee8.jsf23.PlayerEnum" />
+        <f:importConstants type="javaee8.jsf23.PlayerBean" />
+        <f:importConstants type="javaee8.jsf23.PlayerBean" var="CONSTANTS" />
+    </f:metadata>
+    <h:head>
+        <title>JSF 2.3 - ImportConstants</title>              
+    </h:head>
+    <h:body>                   
+        <h5>Display the 'NAME_C' constant value</h5>
+        <h:outputText value="#{PlayerBean.NAME_C}"/><br/>
+        <h:outputText value="#{CONSTANTS.NAME_C}"/><br/>
+
+        <h5>Loop enum values</h5>
+        <ui:repeat value="#{PlayerEnum.values()}" var="t">
+            #{t}
+        </ui:repeat>
+
+        <h5>Providing enum values as dropdown items and test again 'FIRST'</h5>
+        <h:form>
+            <h:selectOneMenu value="#{playerBean.selectedPlayerEnum}">        
+                <f:selectItems value="#{PlayerEnum}" />
+                <f:ajax render="@form" />
+            </h:selectOneMenu>
+            #{playerBean.selectedPlayerEnum}
+            [#{playerBean.selectedPlayerEnum == PlayerEnum.FIRST}]
+        </h:form> 
+
+        <h5>Providing enum values as dropdown items by var  and test again 'FIRST'</h5>
+        <h:form>
+            <h:selectOneMenu value="#{playerBean.selectedPlayerEnum}">        
+                <f:selectItems value="#{PlayerEnum.values()}" var="t" itemLabel="#{t.rank}" itemValue="#{t}" />
+                <f:ajax render="@form" />
+            </h:selectOneMenu>
+            #{playerBean.selectedPlayerEnum}
+            [#{playerBean.selectedPlayerEnum == PlayerEnum.FIRST}]
+        </h:form> 
+    </h:body>
+</html>
+
