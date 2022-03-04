@@ -13,8 +13,6 @@
             </h:commandButton>
         </h:form>
 
-        <f:websocket channel="clock" onmessage="socketListener" />        
-
         <hr/>
         <div id="clockId"></div>
 
@@ -22,7 +20,9 @@
             function socketListener(message, channel, event) {                       
                 document.getElementById("clockId").innerHTML += message + "<br/>";
             }
-        </script>    
+        </script>
+
+        <f:websocket channel="clock" onmessage="socketListener" />        
     </h:body>
 </html>
 
